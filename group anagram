@@ -1,0 +1,37 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+public class Solution {
+    public List<List<string>> GroupAnagrams(string[] strs) {
+        
+        var map = new Dictionary<string, List<string>>();
+
+        foreach (var str in strs) {
+            int[] count = new int[26];
+
+            // Count characters
+            foreach (char c in str) {
+                count[c - 'a']++;
+            }
+
+            // Build key
+            StringBuilder keyBuilder = new StringBuilder();
+            foreach (int num in count) {
+                keyBuilder.Append(num).Append('#');
+            }
+
+            string key = keyBuilder.ToString();
+
+            // Add to dictionary
+            if (!map.ContainsKey(key)) {
+                map[key] = new List<string>();
+            }
+
+            map[key].Add(str);
+        }
+
+        // Convert to List<List<string>>
+        return new List<List<string>>(map.Values);
+    }
+}
