@@ -1,0 +1,47 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+public class Solution {
+
+    // Encode
+    public string Encode(IList<string> strs) {
+        StringBuilder encoded = new StringBuilder();
+
+        foreach (var str in strs) {
+            encoded.Append(str.Length).Append('#').Append(str);
+        }
+
+        return encoded.ToString();
+    }
+
+    // Decode
+    public List<string> Decode(string s) {
+        List<string> result = new List<string>();
+        int i = 0;
+
+        while (i < s.Length) {
+            int j = i;
+
+            // Find delimiter '#'
+            while (s[j] != '#') {
+                j++;
+            }
+
+            // Get length
+            int length = int.Parse(s.Substring(i, j - i));
+
+            // Move to string start
+            j++;
+
+            // Extract string
+            string str = s.Substring(j, length);
+            result.Add(str);
+
+            // Move pointer
+            i = j + length;
+        }
+
+        return result;
+    }
+}
