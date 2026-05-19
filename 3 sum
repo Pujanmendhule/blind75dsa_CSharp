@@ -44,8 +44,14 @@ public IList<IList<int>> ThreeSum(int[] nums)
             {
                 right--;
             }
+
         }
     }
 
     return result;
 }
+
+
+
+
+//hey 
